@@ -6,8 +6,8 @@ on:
 
 jobs:
   notify:
-    if: github.event.pull_request.user.login == 'pakxe' && github.event.repository.full_name == 'ICE-graduation-project/front-end'
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.head.repo.full_name == 'pakxe/front-end' && github.event.pull_request.base.repo.full_name == 'ICE-graduation-project/front-end' }}
     steps:
     - name: Send notification to IFTTT
       run: |
