@@ -2,12 +2,12 @@ name: Notify IFTTT on PR
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types:
+      - opened
 
 jobs:
-  notify:
+  run_if:
+    if:  startsWith(github.head_ref, 'ICE-graduation-project/')
     runs-on: ubuntu-latest
     steps:
-    - name: Send notification to IFTTT
-      run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"${{ github.event.pull_request.html_url }}"}' https://maker.ifttt.com/trigger/github_pr/with/key/cikJxT4rr-GhQ2gp56ZfCH
+      - run: echo "으아악"
