@@ -1,13 +1,16 @@
-name: PR Notification
+name: PR 시 IFTTT 알림 보내기
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, reopened]
 
 jobs:
-  notify:
+  notify-ifttt:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Send notification to IFTTT
+    - name: IFTTT에 알림 보내기
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"${{ github.event.pull_request.html_url }}"}' https://maker.ifttt.com/trigger/github_pr/with/key/cikJxT4rr-GhQ2gp56ZfCH
+        curl -X POST https://maker.ifttt.com/trigger/github_pr/with/key/cikJxT4rr-GhQ2gp56ZfCH \
+        -H "Content-Type: application/json" \
+        -d '{"value1": "${{ github.repository }}", "value2": "${{ github.event.pull_request.html_url }}", "value3": "${{ github.event.pull_request.title }}"}'
