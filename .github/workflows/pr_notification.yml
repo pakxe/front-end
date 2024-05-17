@@ -3,13 +3,11 @@ name: Notify IFTTT on PR to Original Repo
 on:
   pull_request:
     types: [opened, reopened]
-    branches:
-      - main  # PR을 보낼 브랜치를 지정합니다 (필요에 따라 변경 가능)
 
 jobs:
   notify-ifttt:
-    if: ${{ github.event.pull_request.base.repo.full_name == 'ICE-graduation-project/front-end' }}
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.base.repo.full_name == 'ICE-graduation-project/front-end' }}
 
     steps:
     - name: Send notification to IFTTT
